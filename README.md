@@ -27,5 +27,5 @@ npm run dev
 ```sh
 npm run build
 ```
-# recette
+
 # YouCareUI-Vue.js
