@@ -94,25 +94,29 @@ export default {
         });
 
         const token = response.data.authorisation.token;
+        const role = response.data.user.role;
 
         localStorage.setItem('token', token);
+        localStorage.setItem('role', role);
 
-        if (response.data.user.role === 'benevole') {
+        if (role === 'benevole') {
           router.push("/benevole");
-        }
-        if (response.data.user.role === 'organisator') {
+        } else if (role === 'organisator') {
           router.push("/organisator");
-        }
-       else {
+        } else if (role === 'admin') {
+          router.push("/admin");
+        } else {
           router.push("/register");
         }
       } catch (error) {
-       console.log("UIO")
+        console.log("ERROR LOGIN:", error);
       }
     },
   },
 };
 </script>
+                                   
+
 
 
 

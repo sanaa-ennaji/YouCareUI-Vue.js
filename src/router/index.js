@@ -5,6 +5,7 @@ import register from '../views/register.vue'
 import admin from '../views/admin.vue'
 import organisator from '../views/organisator.vue' 
 import benevole from '../views/benevole.vue'
+import events from '../views/events.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -48,6 +49,12 @@ const router = createRouter({
       path: '/benevole',
       name: 'benevole',
       component: benevole
+ 
+    },
+    {
+      path: '/events',
+      name: 'events',
+      component: events
  
     }
   ]
