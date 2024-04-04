@@ -1,5 +1,4 @@
 <template>
-
     <nav class="mb-20 bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -34,7 +33,7 @@
       </div>
     </nav>
     
-    <div class="wrapper">
+    <form  @submit.prevent="register" class="wrapper">   
         <div class="mt-20 mx-auto flex w-full max-w-sm flex-col">
           <div class="mx-auto flex lg:hidden">
             <NuxtLogo />
@@ -43,7 +42,7 @@
           <h1 class="mt-20 text-2xl font-semibold text-gray-700 lg:mt-0">
           create an acount
           </h1>
-          <form @submit.prevent="register">
+        
         <p class="mt-5 text-sm font-semibold text-gray-500">Name</p>
         <input v-model="name" class="mt-1 rounded border py-1 px-3 text-sm shadow" />
         
@@ -62,9 +61,7 @@
         <button class="mt-5 rounded border bg-indigo-400 py-2 px-5 text-sm font-semibold text-gray-50 shadow hover:bg-indigo-500">
           Register
         </button>
-      </form>
-      
-          
+    
           <div class="mt-8 flex items-center space-x-1">
             <p class="text-sm font-semibold text-gray-500">alreaday have an account ?</p>
             <a
@@ -74,7 +71,7 @@
             >
           </div>
         </div>
-      </div>
+    </form>
     </template>
     
     <style>
