@@ -34,46 +34,23 @@
   </div>
 </nav>
 
-<div class="wrapper">
+<form @submit.prevent="login" class="wrapper">
     <div class="mt-20 mx-auto flex w-full max-w-sm flex-col">
-      <div class="mx-auto flex lg:hidden">
-        <NuxtLogo />
-      </div>
       <h1 class="mt-20 text-2xl font-semibold text-gray-700 lg:mt-0">
         Welcome back
       </h1>
       <p class="mt-2 text-sm text-gray-400">Please sign in below</p>
       <p class="mt-5 text-sm font-semibold text-gray-500">Email</p>
-      <input class="mt-1 rounded border py-1 px-3 text-sm shadow" />
+      <input class="mt-1 rounded border py-1 px-3 text-sm shadow" v-model="email" />
       <p class="mt-5 text-sm font-semibold text-gray-500">Password</p>
       <input
         class="mt-1 rounded border py-1 px-3 text-sm text-sm shadow"
-        type="password"
+        type="password" v-model="password"
       />
-      <div class="mt-5 flex items-center">
-        <input class="mr-2 align-middle text-sm text-sm" type="checkbox" />
-        <p class="text-sm font-semibold text-gray-500">Remember me</p>
-        <span class="flex-1" />
-        <a
-          href="#"
-          class="text-sm font-semibold text-indigo-400 hover:text-indigo-500"
-          >Forgot password?</a
-        >
-      </div>
       <button
-        class="mt-5 rounded border bg-indigo-400 py-2 px-5 text-sm text-sm font-semibold text-gray-50 shadow hover:bg-indigo-500"
+        class="mt-5 rounded border bg-indigo-400 py-2 px-5 text-sm text-sm font-semibold text-gray-50 shadow hover:bg-indigo-500" type="submit"
       >
         Sign in
-      </button>
-      <button
-        class="mt-3 rounded border bg-white py-2 px-5 shadow hover:bg-gray-100"
-      >
-        <div class="flex items-center justify-center space-x-2">
-          <GitHubLogo />
-          <span class="text-sm font-semibold text-gray-700"
-            >Sign in with GitHub</span
-          >
-        </div>
       </button>
       <div class="mt-8 flex items-center space-x-1">
         <p class="text-sm font-semibold text-gray-500">Don't have an account?</p>
@@ -84,7 +61,7 @@
         >
       </div>
     </div>
-  </div>
+  </form>
 </template>
 
 <style>
@@ -95,6 +72,47 @@
   height: 100vh; 
 }
 </style>
+
+<script>
+import axios from 'axios';
+import router from '@/router'; 
+
+export default {
+  name: "login",
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.post("http://127.0.0.1:8000/api/login", {
+          email: this.email,
+          password: this.password,
+        });
+
+        const token = response.data.authorisation.token;
+
+        localStorage.setItem('token', token);
+
+        if (response.data.user.role === 'benevole') {
+          router.push("/benevole");
+        }
+        if (response.data.user.role === 'organisator') {
+          router.push("/organisator");
+        }
+       else {
+          router.push("/register");
+        }
+      } catch (error) {
+       console.log("UIO")
+      }
+    },
+  },
+};
+</script>
 
 
 

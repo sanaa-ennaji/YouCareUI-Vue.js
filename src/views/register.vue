@@ -15,7 +15,7 @@
         </button>
       </div>
       <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-        <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+<ul class="flex flex-col p-4 md:p                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       -0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
           <li>
             <a href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500" aria-current="page">Home</a>
           </li>
@@ -35,9 +35,9 @@
     
     <form  @submit.prevent="register" class="wrapper">   
         <div class="mt-20 mx-auto flex w-full max-w-sm flex-col">
-          <div class="mx-auto flex lg:hidden">
+          <!-- <div class="mx-auto flex lg:hidden">
             <NuxtLogo />
-          </div>
+          </div> -->
 
           <h1 class="mt-20 text-2xl font-semibold text-gray-700 lg:mt-0">
           create an acount
@@ -56,8 +56,10 @@
         <input v-model="phone" class="mt-1 rounded border py-1 px-3 text-sm shadow" />
 
         <p class="mt-5 text-sm font-semibold text-gray-500">Role</p>
-        <input v-model="role" class="mt-1 rounded border py-1 px-3 text-sm shadow" />
-
+        <select v-model="role" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option value="benevole">benevole</option>
+    <option value="organisator">organisator</option>
+  </select>
         <button class="mt-5 rounded border bg-indigo-400 py-2 px-5 text-sm font-semibold text-gray-50 shadow hover:bg-indigo-500">
           Register
         </button>
@@ -82,11 +84,12 @@
       height: 100vh; 
     }
     </style>
-    
-    
-    <script>
-import axios from 'axios';
 
+
+
+<script>
+import axios from 'axios';
+import router from '@/router';
 export default {
   data() {
     return {
@@ -107,6 +110,7 @@ export default {
           phone: this.phone,
           role: this.role
         });
+        router.push("/login");
        
       } catch (error) {
         
@@ -116,38 +120,5 @@ export default {
 };
 </script>
     
-    <!-- <script>
-    import axios from 'axios';
-    
-    export default {
-      data() {
-        return {
-          name: '',
-          email: '',
-          password: '',
-          role: '',
-          phone: '',
-        };
-      },
-      methods: {
-        async register() {
-          try {
-            const response = await axios.post('http://127.0.0.1:8000/api/register', {
-              name: this.name,
-              email: this.email,
-              password: this.password,
-              role: this.role,
-              phone: this.phone,
-            });
-    
-            console.log(response.data);
-            // Handle successful registration
-          } catch (error) {
-            console.log(error.response.data);
-            // Handle error
-          }
-        },
-      },
-    };
-    </script> -->
-    
+   
+   
