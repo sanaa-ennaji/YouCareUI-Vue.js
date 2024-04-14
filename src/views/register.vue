@@ -1,3 +1,12 @@
+<style>
+.wrapper {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  height: 100vh; 
+}
+</style>
+
 <template>
     <nav class="mb-20 bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -75,18 +84,6 @@
         </div>
     </form>
     </template>
-    
-    <style>
-    .wrapper {
-      display: flex;
-      justify-content: center; 
-      align-items: center; 
-      height: 100vh; 
-    }
-    </style>
-
-
-
 <script>
 import axios from 'axios';
 import router from '@/router';
