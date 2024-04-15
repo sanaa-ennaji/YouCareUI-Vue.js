@@ -93,86 +93,70 @@
           </div>
         </form>
       </div>
-
+    
       <div class="lg:col-span-2 lg:py-2">
-        
-     <div class="max-w-2xl mx-auto mb-2">
+  <div class="max-w-2xl mx-auto mb-2" v-for="event in events" :key="event.id">
     <div class="flex gap-3 bg-white border border-gray-300 rounded-xl overflow-hidden items-center justify-start">
-
-        <div class="relative w-32 h-32 flex-shrink-0">
-            <img class="absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50" loading="lazy" src="https://via.placeholder.com/150">
-        </div>
-
-        <div class="flex flex-col gap-2 py-2">
-            <p class="text-xl font-bold">Post title</p>
-
-            <p class="text-gray-500">
-                Description of your post/article,
-             
-            </p>
-
-            <span class="flex items-center justify-start text-gray-500">
-                <svg class="w-4 h-4 mr-1 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
-                </svg>
-                <a href="amitpachange.com" target="_blank">amitpachange.com</a>
-            </span>
-        </div>
-    </div>
-</div>
-
-
-<div class="max-w-2xl mx-auto">
-    <div class="flex gap-3 bg-white border border-gray-300 rounded-xl overflow-hidden items-center justify-start">
-
-        <div class="relative w-32 h-32 flex-shrink-0">
-            <img class="absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50" loading="lazy" src="https://via.placeholder.com/150">
-        </div>
-
-        <div class="flex flex-col gap-2 py-2">
-            <p class="text-xl font-bold">Post title</p>
-
-            <p class="text-gray-500">
-                Description of your post/article,
-             
-            </p>
-
-            <span class="flex items-center justify-start text-gray-500">
-                <svg class="w-4 h-4 mr-1 mt-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd"></path>
-                </svg>
-                <a href="amitpachange.com" target="_blank">amitpachange.com</a>
-            </span>
-        </div>
-    </div>
-</div>
-
+      
+      <div class="relative w-32 h-32 flex-shrink-0">
+        <img class="absolute left-0 top-0 w-full h-full object-cover object-center transition duration-50" loading="lazy" src="../assets/icon-association-youcare.png">
       </div>
-
+      
+      <div class="flex flex-col gap-2 py-2">
+        <h2 class="text-xl font-bold">{{ event.title }}</h2>
+        <p class="text-gray-500">{{ event.description }}</p>
+        <span class="flex items-center justify-start text-gray-500">
+          <a :href="event.type_url" target="_blank">Type: {{ event.type }}</a>
+        </span>
+        <div class="flex gap-2">
+          <button @click="editEvent(event.id)" class="text-gray-500 hover:text-gray-700">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 6v6m0 0v6m0-6h6m-6 0H6"/>
+            </svg>
+          </button>
+          <button @click="deleteEvent(event.id)" class="rounded-full group flex items-center justify-center focus-within:outline-red-500">
+                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <circle class="fill-red-50 transition-all duration-500 group-hover:fill-red-400"
+                            cx="17" cy="17" r="17" fill="" />
+                        <path class="stroke-red-500 transition-all duration-500 group-hover:stroke-white"
+                            d="M14.1673 13.5997V12.5923C14.1673 11.8968 14.7311 11.333 15.4266 11.333H18.5747C19.2702 11.333 19.834 11.8968 19.834 12.5923V13.5997M19.834 13.5997C19.834 13.5997 14.6534 13.5997 11.334 13.5997C6.90804 13.5998 27.0933 13.5998 22.6673 13.5997C21.5608 13.5997 19.834 13.5997 19.834 13.5997ZM12.4673 13.5997H21.534V18.8886C21.534 20.6695 21.534 21.5599 20.9807 22.1131C20.4275 22.6664 19.5371 22.6664 17.7562 22.6664H16.2451C14.4642 22.6664 13.5738 22.6664 13.0206 22.1131C12.4673 21.5599 12.4673 20.6695 12.4673 18.8886V13.5997Z"
+                            stroke="#EF4444" stroke-width="1.6" stroke-linecap="round" />
+                    </svg>
+                </button>
+        </div>
+      </div>
     </div>
   </div>
-</section>
+</div>
 
+
+      </div>
+    </div>
+  </section>
 </template>
+
 <script>
 import axios from 'axios';
 import router from '@/router';
 
-
 export default {
-    data() {
-        return {
-            title: "",
-            description: "",
-            date: "",
-            location: "",
-            type: "",
-            competences: "",
-        };
-
-    },
-    methods: {
-        async creatEvent() {
+  data() {
+    return {
+      title: "",
+      description: "",
+      date: "",
+      location: "",
+      type: "",
+      competences: "",
+      events: [] 
+    };
+  },
+  mounted() {
+    this.fetchEventsOfOrganizer();
+  },
+  methods: {
+    async creatEvent() {
             try {
                 const token = localStorage.getItem('token');
 
@@ -204,6 +188,23 @@ export default {
             }
         },
 
-    },
+    async fetchEventsOfOrganizer() {
+      try {
+        const token = localStorage.getItem('token');
+        const config = {
+          headers: { Authorization: `Bearer ${token}` }
+        };
+
+        const response = await axios.get("http://127.0.0.1:8000/api/organisator/events", config);
+        if (response.status === 200) {
+          this.events = response.data.event;
+        } else {
+          console.error("Failed to fetch events:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error during fetching events:", error);
+      }
+    }
+  }
 };
 </script>
