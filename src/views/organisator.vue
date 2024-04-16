@@ -1,55 +1,97 @@
 <template>
-    <section class="bg-gray-100">
-      <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
-        <div class="lg:col-span-2 lg:py-2">
-          <div class="max-w-2xl mx-auto mb-2" v-for="event in events" :key="event.id">
-            <div v-if="event.postulations && event.postulations.length > 0">
-              <h2 class="text-xl font-bold mt-4">Postulations</h2>
-              <ul>
-                <li v-for="postulation in event.postulations" :key="postulation.id">
-                  <p>{{ postulation.skills }}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <div>
+        <div v-if="fetchError">
+            Error fetching data: {{ fetchError.message }}
         </div>
-      </div>
-    </section>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  import router from '@/router';
-  
-  export default {
+        <div v-else>
+            <div v-if="isFetching">
+                Fetching data...
+            </div>
+            <div v-else>
+                <div v-for="postulation in postulations" :key="postulation.id">
+                    <div class="postulation-card">
+                        <h5>{{ postulation.status }}</h5>
+                        <p>{{ postulation.user.name }}</p>
+                        <p>{{ postulation.user.email }}</p>
+                        <button @click="acceptPostulation(postulation.id, 'accepted')">Accept</button>
+                        <button @click="acceptPostulation(postulation.id, 'refused')">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+import axios from 'axios';
+
+export default {
     data() {
-      return {
-        events: [] 
-      };
+        return {
+            postulations: [],
+            isFetching: false,
+            fetchError: null
+        };
     },
     mounted() {
-      this.fetchEventsOfOrganizer();
-      this.fetchPostulationsOfEvent();
+        this.fetchPostulations();
     },
     methods: {
-      async fetchPostulationsOfEvent() {
-        try {
-          const token = localStorage.getItem('token');
-          const config = {
-            headers: { Authorization: `Bearer ${token}` }
-          };
-  
-          const response = await axios.get(`http://127.0.0.1:8000/api/events/postulations`, config);
-          if (response.status === 200) {
-            this.events = response.data.event;
-          } else {
-            console.error("Failed to fetch postulations:", response.statusText);
-          }
-        } catch (error) {
-          console.error("Error during fetching postulations:", error);
+        fetchPostulations() {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+
+            this.isFetching = true;
+
+            axios.get('http://127.0.0.1:8000/api/organisator/postulations', config)
+                .then(response => {
+                    console.log('Data:', response.data);
+                    this.postulations = response.data.postulations;
+                    this.isFetching = false;
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                    this.fetchError = error;
+                    this.isFetching = false;
+                });
+        },
+        acceptPostulation(postulationId, status) {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: { Authorization: `Bearer ${token}` }
+            };
+
+            axios.put(`http://127.0.0.1:8000/api/accepte/${postulationId}`, { status }, config)
+                .then(response => {
+                    if (response.status === 200) {
+                        console.log('Postulation accepted successfully');
+                        // Update the status of the postulation locally
+                        const updatedPostulations = this.postulations.map(post => {
+                            if (post.id === postulationId) {
+                                return { ...post, status };
+                            }
+                            return post;
+                        });
+                        this.postulations = updatedPostulations;
+                    } else {
+                        console.error('Failed to accept postulation:', response.statusText);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error accepting postulation:', error);
+                });
         }
-      }
     }
-  };
-  </script>
-  
+};
+</script>
+
+<style>
+.postulation-card {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+</style>

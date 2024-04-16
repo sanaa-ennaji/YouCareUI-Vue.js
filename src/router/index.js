@@ -7,6 +7,7 @@ import organisator from '../views/organisator.vue'
 import benevole from '../views/benevole.vue'
 import events from '../views/events.vue'
 import addevent from '../views/addevent.vue' 
+import updateEvent from '../views/updateEvent.vue' 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -18,9 +19,7 @@ const router = createRouter({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+   
       component: () => import('../views/AboutView.vue')
     },
     {
@@ -62,6 +61,11 @@ const router = createRouter({
       path: '/addevent',
       name : 'addevent',
       component : addevent
+    },
+    {
+      path: '/updateEvent',
+      name : 'updateEvent',
+      component : updateEvent
     }
   ]
 })
