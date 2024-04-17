@@ -32,8 +32,8 @@
   </div>
   </div>
 </nav> 
-<div class="heading text-center font-bold text-2xl m-5 mx-auto">Postulations for your events</div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10">
+<div class="heading text-center font-bold text-2xl m-5 mx-auto mt-20">Postulations for your events</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-10 ">
       
       <div v-if="fetchError" class="bg-red-100 text-red-500 p-4 rounded text-center col-span-full">
         Error fetching data: {{ fetchError.message }}

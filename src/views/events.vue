@@ -133,7 +133,6 @@ methods: {
 
     axios.post('http://127.0.0.1:8000/api/postulation', { event_id: eventId, skills }, config)
       .then(response => {
-        // console.log('Postulation successful:', response.data); 
         this.flashMessage = 'Postulation done successfully';
                     setTimeout(() => {
                         this.flashMessage = null;
@@ -173,5 +172,4 @@ methods: {
   }
 };
  
-
 </script>
