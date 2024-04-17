@@ -75,7 +75,7 @@
   
       <div>
         <input v-model="skills[index]" type="text" placeholder="Skills" class="border border-gray-400 p-1 rounded">
-        <button @click="postulate(event.id, skills[index])" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Postulate</button>
+        <button @click="postulate(event.id, skills[index])" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded ml-2">Postulate</button>
       </div>
     </div>
   </div>
