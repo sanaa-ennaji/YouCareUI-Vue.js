@@ -1,5 +1,5 @@
-<template></template>
- <!--  <section class="min-h-screen">
+<template>
+  <section class="min-h-screen">
 
       <div class="max-w-4xl mx-auto font-[sans-serif] mt-12 text-[#333] p-6">
           <div class="text-center mb-16">
@@ -67,7 +67,7 @@ export default {
       return {
           idEvent: "",
           events: {
-              title: "",
+       title: "",
       description: "",
       date: "",
       location: "",
@@ -101,12 +101,12 @@ export default {
               };
 
               const eventData = {
-                  title: this.events.title,
-                  type: this.events.type,
-                  date: this.events.date,
-                  localisation: this.events.localisation,
-                  competence: this.events.competence,
-                  description: this.events.description,
+                title: this.title,
+                    description: this.description,
+                    date: this.date,
+                    location: this.location,
+                    type: this.type,
+                    competences: this.competences,
               };
 
               const response = await axios.put(`http://127.0.0.1:8000/api/updateEvent/${this.idEvent}`, eventData, config);
@@ -126,4 +126,4 @@ export default {
 
   },
 };
-</script> -->
+</script>
