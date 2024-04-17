@@ -1,7 +1,7 @@
 <template>
 <nav class="mb-20 bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-  <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+  <a href="" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="../assets/icon-association-youcare.png" class="h-8" alt="Flowbite Logo">
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">youcare</span>
   </a>
@@ -69,7 +69,7 @@
 
     <div class="desc p-4 text-gray-800">
       <a :href="event.titleURL" target="_new" class="title font-bold block cursor-pointer hover:underline">{{ event.title }}</a>
-      <a :href="event.titleURL" target="_new" class="badge bg-indigo-500 text-blue-100 rounded px-1 text-xs font-bold cursor-pointer">@{{ event.organizerName }}</a>
+      <a href="" target="_new"  class="badge bg-indigo-500 text-blue-100 rounded px-1 text-xs font-bold cursor-pointer">@organisator</a>
       <span class="description text-sm block py-2 border-gray-400 mb-2">{{ event.description }}</span>
       
   
@@ -155,19 +155,20 @@ methods: {
       this.isFetching = true;
 
       axios.get('http://127.0.0.1:8000/api/event/search', {
-        params: { query: this.searchParams.query },
-        headers: config.headers
-      })
-      .then(response => {
-        console.log('Search Results:', response.data); 
-        this.events = response.data.events;
-        this.isFetching = false;
-      })
-      .catch(error => {
-        console.error('Error searching events:', error);
-        this.fetchError = error;
-        this.isFetching = false;
-      });
+    params: { query: this.searchParams.query },
+    headers: config.headers
+})
+.then(response => {
+    console.log('Search Results:', response.data); 
+    this.events = response.data.events;
+    this.isFetching = false;
+})
+.catch(error => {
+    console.error('Error searching events:', error);
+    this.fetchError = error;
+    this.isFetching = false;
+});
+
     }
   }
 };
