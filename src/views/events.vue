@@ -32,7 +32,11 @@
   </div>
   </div>
 </nav> 
-
+<div v-if="flashMessage"
+            class=" p-4 mb-4  text-sm  fixed left-10 top-20 text-green-800 rounded-lg bg-green-100 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            {{ flashMessage }}
+        </div>
 <form @submit.prevent="searchEvents" class="max-w-md mx-auto mt-20">   
     <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
     <div class="relative">
@@ -130,7 +134,7 @@ methods: {
     axios.post('http://127.0.0.1:8000/api/postulation', { event_id: eventId, skills }, config)
       .then(response => {
         // console.log('Postulation successful:', response.data); 
-        this.flashMessage = 'Reservation Passed Wait For Confirmation';
+        this.flashMessage = 'Postulation done successfully';
                     setTimeout(() => {
                         this.flashMessage = null;
                     }, 3000);

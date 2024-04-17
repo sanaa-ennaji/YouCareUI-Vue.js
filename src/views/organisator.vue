@@ -1,26 +1,32 @@
 <template>
-    <div>
-        <div v-if="fetchError">
-            Error fetching data: {{ fetchError.message }}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10">
+      <div v-if="fetchError" class="bg-red-100 text-red-500 p-4 rounded text-center col-span-full">
+        Error fetching data: {{ fetchError.message }}
+      </div>
+      <div v-else class="flex flex-col gap-4 col-span-full">
+        <div v-if="isFetching" class="flex items-center justify-center h-24 rounded col-span-full">
+          Fetching data ...
         </div>
         <div v-else>
-            <div v-if="isFetching">
-                Fetching data...
+          <div v-for="postulation in postulations" :key="postulation.id" class="postulation-card bg-white rounded shadow-md">
+            <div class="p-4 border-b border-gray-200">
+              <h5 class="text-xl font-medium mr-4">{{ postulation.status }}</h5>
+              <p class="text-gray-600">{{ postulation.user.name }}</p>
+              <p class="text-gray-600 ml-4">{{ postulation.user.email }}</p>
             </div>
-            <div v-else>
-                <div v-for="postulation in postulations" :key="postulation.id">
-                    <div class="postulation-card">
-                        <h5>{{ postulation.status }}</h5>
-                        <p>{{ postulation.user.name }}</p>
-                        <p>{{ postulation.user.email }}</p>
-                        <button @click="acceptPostulation(postulation.id, 'accepted')">Accept</button>
-                        <button @click="acceptPostulation(postulation.id, 'refused')">Decline</button>
-                    </div>
-                </div>
+            <div class="flex justify-end p-4">
+              <button @click="acceptPostulation(postulation.id, 'accepted')" class="bg-green-500 text-white hover:bg-green-700 font-medium py-2 px-4 rounded focus:outline-none">Accept</button>
+              <button @click="acceptPostulation(postulation.id, 'refused')" class="bg-red-500 text-white hover:bg-red-700 font-medium py-2 px-4 rounded focus:outline-none ml-2">Decline</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</template>
+  </template>
+  
+  
+  
+  
 
 <script>
 import axios from 'axios';
@@ -67,7 +73,7 @@ export default {
                 .then(response => {
                     if (response.status === 200) {
                         console.log('Postulation accepted successfully');
-                        // Update the status of the postulation locally
+                        
                         const updatedPostulations = this.postulations.map(post => {
                             if (post.id === postulationId) {
                                 return { ...post, status };

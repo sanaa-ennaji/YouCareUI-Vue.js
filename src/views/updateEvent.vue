@@ -1,9 +1,9 @@
-<template>
-  <section class="min-h-screen">
+<template></template>
+ <!--  <section class="min-h-screen">
 
       <div class="max-w-4xl mx-auto font-[sans-serif] mt-12 text-[#333] p-6">
           <div class="text-center mb-16">
-              <a href="javascript:void(0)"><img src="@/assets/YoucareLogo.png" alt="logo" class='w-52 inline-block' />
+              <a href="javascript:void(0)"><img src="../assets/icon-association-youcare.png" alt="logo" class='w-52 inline-block' />
               </a>
               <h4 class="text-base font-semibold mt-3">Update Event Here !!</h4>
           </div>
@@ -61,9 +61,7 @@ import axios from 'axios';
 import router from '@/router';
 
 export default {
-  components: {
-      navbar: navbar
-  },
+
   name: "Register",
   data() {
       return {
@@ -128,4 +126,4 @@ export default {
 
   },
 };
-</script>
+</script> -->
