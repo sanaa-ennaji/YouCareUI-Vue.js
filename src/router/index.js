@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import loginView from '../views/loginView.vue'
 import register from '../views/register.vue'
-import admin from '../views/admin.vue'
 import organisator from '../views/organisator.vue' 
 import benevole from '../views/benevole.vue'
 import events from '../views/events.vue'
@@ -31,12 +30,6 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: register
- 
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component:admin
  
     },
     {

@@ -88,6 +88,7 @@ data() {
     events: [],
     isFetching: false,
     fetchError: null,
+    flashMessage: null,
     skills: [] ,
     searchParams: {
         query: ''
@@ -128,13 +129,18 @@ methods: {
 
     axios.post('http://127.0.0.1:8000/api/postulation', { event_id: eventId, skills }, config)
       .then(response => {
-        console.log('Postulation successful:', response.data); 
+        // console.log('Postulation successful:', response.data); 
+        this.flashMessage = 'Reservation Passed Wait For Confirmation';
+                    setTimeout(() => {
+                        this.flashMessage = null;
+                    }, 3000);
       })
       .catch(error => {
         console.error('Error postulating:', error);
         
       });
   },
+
   searchEvents() {
       const token = localStorage.getItem('token');
       const config = {
