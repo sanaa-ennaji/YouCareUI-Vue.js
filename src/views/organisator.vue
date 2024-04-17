@@ -8,7 +8,7 @@
           Fetching data ...
         </div>
         <div v-else>
-          <div v-for="postulation in postulations" :key="postulation.id" class="postulation-card bg-white rounded shadow-md">
+          <div v-for="postulation in postulations" :key="postulation.id" class="postulation-card bg-white rounded shadow-md inline-block w-full sm:w-auto">
             <div class="p-4 border-b border-gray-200">
               <h5 class="text-xl font-medium mr-4">{{ postulation.status }}</h5>
               <p class="text-gray-600">{{ postulation.user.name }}</p>
@@ -16,18 +16,13 @@
             </div>
             <div class="flex justify-end p-4">
               <button @click="acceptPostulation(postulation.id, 'accepted')" class="bg-green-500 text-white hover:bg-green-700 font-medium py-2 px-4 rounded focus:outline-none">Accept</button>
-              <button @click="acceptPostulation(postulation.id, 'refused')" class="bg-red-500 text-white hover:bg-red-700 font-medium py-2 px-4 rounded focus:outline-none ml-2">Decline</button>
+              <button @click="acceptPostulation(postulation.id, 'rejected')" class="bg-red-500 text-white hover:bg-red-700 font-medium py-2 px-4 rounded focus:outline-none ml-2">Decline</button>
             </div>
           </div>
         </div>
       </div>
     </div>
   </template>
-  
-  
-  
-  
-
 <script>
 import axios from 'axios';
 
@@ -72,7 +67,7 @@ export default {
             axios.put(`http://127.0.0.1:8000/api/accepte/${postulationId}`, { status }, config)
                 .then(response => {
                     if (response.status === 200) {
-                        console.log('Postulation accepted successfully');
+                        console.log('Postulation updated successfully');
                         
                         const updatedPostulations = this.postulations.map(post => {
                             if (post.id === postulationId) {
@@ -86,7 +81,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    console.error('Error accepting postulation:', error);
+                    console.error('Error updating postulation:', error);
                 });
         }
     }
