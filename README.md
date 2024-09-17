@@ -1,4 +1,4 @@
-# YouCareUI - Front-End de la Plateforme de Volontariat
+# Brif 17: Front-End de la Plateforme de Volontariat
 
 Suite au développement de l'API REST pour la plateforme de volontariat de **YouCare**, il est nécessaire de créer une interface utilisateur conviviale et fonctionnelle pour permettre aux utilisateurs d'interagir avec cette API.
 
